@@ -1,0 +1,59 @@
+---
+export interface Props {
+  percent: number;
+}
+
+const { percent } = Astro.props;
+
+const circumference = 2 * Math.PI * 70;
+const style = `
+      stroke-dasharray: ${circumference};
+      stroke-dashoffset: ${(1 - percent / 100) * circumference};
+    `;
+---
+
+<svg
+  class="circular-progress"
+  width="170"
+  height="170"
+  viewBox="0 0 170 170"
+  fill="none"
+  xmlns="http://www.w3.org/2000/svg"
+>
+  <circle
+    cx="85"
+    cy="85"
+    r="70"
+    fill="none"
+    stroke="url(#paint0_linear_16_344)"
+    stroke-width="15"
+    style={style}></circle>
+  <text x="85" y="85" fill="white">{percent}%</text>
+  <defs>
+    <linearGradient
+      id="paint0_linear_16_344"
+      x1="-12.4348"
+      y1="91.2145"
+      x2="228.124"
+      y2="92.098"
+      gradientUnits="userSpaceOnUse"
+    >
+      <stop stop-color="#AA367C"></stop>
+      <stop offset="1" stop-color="#4A2FBD"></stop>
+    </linearGradient>
+  </defs>
+</svg>
+
+<style>
+  circle {
+    stroke-linecap: round;
+  }
+
+  svg text {
+    transform-origin: center center;
+    transform: translateY(7px);
+    text-anchor: middle;
+    font-size: 28px;
+    font-weight: bold;
+  }
+</style>

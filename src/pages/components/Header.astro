@@ -1,0 +1,136 @@
+---
+import CircleIcon from "../../components/circle-icon/CircleIcon.astro";
+---
+
+<header class="header">
+  <nav class="nav">
+    <a class="logo" href="/">
+      <img src="/img/logo.jpg" alt="#" />
+    </a>
+    <div class="anchor-container">
+      <a href="#home" class="active">Home</a>
+      <a href="#home">Skills</a>
+      <a href="#home">Projects</a>
+    </div>
+    <div class="social-container">
+      <CircleIcon icon="/img/nav-icon1.svg" href="/" />
+      <CircleIcon icon="/img/nav-icon2.svg" href="/" class="ml-6" />
+      <CircleIcon icon="/img/nav-icon3.svg" href="/" class="ml-6" />
+    </div>
+    <button class="connect-btn">
+      <span>Let's Connect</span>
+    </button>
+  </nav>
+</header>
+
+<script>
+  import { debounce } from "../../utils/debounce";
+
+  const onScroll = debounce((e) => {
+    const hader: HTMLElement | null = document.querySelector(".header");
+    if (hader != null && window.scrollY > 60) {
+      hader.classList.add("scrolled");
+    } else {
+      hader?.classList?.remove("scrolled");
+    }
+  }, 60);
+
+  window.onscroll = onScroll;
+</script>
+
+<style>
+  .header {
+    padding: 18px 0;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 9999;
+    transition: 0.32s ease-in-out;
+  }
+
+  .header.scrolled {
+    padding: 8px 0px;
+    background-color: #121212;
+  }
+
+  .header .nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 1320px;
+    margin: 0 auto;
+  }
+
+  .header .nav .logo {
+    display: block;
+    width: 3.5%;
+  }
+
+  .header .nav .logo img {
+    width: 100%;
+    height: auto;
+    vertical-align: middle;
+  }
+
+  .header .nav .anchor-container {
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .header .nav .anchor-container a {
+    color: #fff;
+    opacity: 0.75;
+    margin: 0 25px;
+    font-weight: 400;
+    transition: all 0.15s;
+    letter-spacing: 0.8px;
+    font-size: 18px;
+  }
+
+  .header .nav .anchor-container a.active,
+  .header .nav .anchor-container a:hover {
+    opacity: 1;
+  }
+
+  .header .nav .social-container .ml-6 {
+    margin-left: 6px;
+  }
+
+  .connect-btn {
+    cursor: pointer;
+    color: #fff;
+    border: 1px solid #fff;
+    padding: 18px 34px;
+    font-size: 18px;
+    margin-left: 18px;
+    position: relative;
+    background-color: transparent;
+    transition: 0.3s ease-in-out;
+  }
+
+  .connect-btn span {
+    z-index: 1;
+  }
+
+  .connect-btn::before {
+    content: "";
+    display: block;
+    width: 0;
+    height: 100%;
+    background-color: #fff;
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: -1;
+    transition: 0.3s ease-in-out;
+  }
+
+  .connect-btn:hover {
+    color: #121212;
+  }
+
+  .connect-btn:hover::before {
+    width: 100%;
+  }
+</style>

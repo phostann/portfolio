@@ -1,0 +1,58 @@
+---
+import CircleIcon from "../../components/circle-icon/CircleIcon.astro";
+---
+
+<footer class="footer">
+  <div class="container">
+    <div class="box">
+      <img src="/img/logo.svg" alt="" />
+      <div class="social">
+        <div class="social-icons">
+          <CircleIcon icon="/img/nav-icon1.svg" href="/" />
+          <CircleIcon icon="/img/nav-icon2.svg" href="/" class="ml-6" />
+          <CircleIcon icon="/img/nav-icon3.svg" href="/" class="ml-6" />
+        </div>
+        <p class="copyright">Copyright 2023. All Rights Reserved</p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    padding: 0 0 50px 0;
+    background-image: url("/img/footer-bg.png");
+    background-position: center center;
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+
+  .container {
+    width: 1320px;
+    margin: 0 auto;
+  }
+
+  .box {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    padding-top: 40px;
+  }
+
+  .social-icons {
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .social-icons .ml-6 {
+    margin-left: 6px;
+  }
+
+  .copyright {
+    margin-top: 20px;
+    font-size: 14px;
+    color: #b8b8b8;
+    letter-spacing: 0.5px;
+  }
+</style>

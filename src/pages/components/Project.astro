@@ -1,0 +1,155 @@
+---
+type IProject = {
+  banner: string;
+  title: string;
+  subtitle: string;
+  link?: string;
+};
+const projects: IProject[] = [
+  {
+    banner: "/img/project-img1.png",
+    title: "Business Startup",
+    subtitle: "Design & Development",
+    link: "https://www.google.com",
+  },
+  {
+    banner: "/img/project-img1.png",
+    title: "Business Startup",
+    subtitle: "Design & Development",
+  },
+  {
+    banner: "/img/project-img1.png",
+    title: "Business Startup",
+    subtitle: "Design & Development",
+  },
+];
+---
+
+<section class="wrapper">
+  <div class="container">
+    <div class="box">
+      <h2>projects</h2>
+      <p>
+        As a software developer, I find immense gratification in bringing my
+        ideas to life through technical means. Though this process may present
+        several challenges, I relish the hearty feeling that comes with
+        overcoming each obstacle.
+      </p>
+      <div class="project-container">
+        {
+          projects.map((p) => {
+            return (
+              <div class="project-box" data-link={p.link ?? ""}>
+                <img src={p.banner} alt="" />
+                <div class="desc">
+                  <h4>{p.title}</h4>
+                  <span>{p.subtitle}</span>
+                </div>
+              </div>
+            );
+          })
+        }
+      </div>
+    </div>
+  </div>
+</section>
+<script>
+  const boxes = document.querySelectorAll<HTMLElement>(".project-box");
+  boxes?.forEach((box) => {
+    box.addEventListener("click", (e) => {
+      const dom = e.currentTarget as HTMLElement;
+      const link = dom.dataset.link;
+      if (link != null && link != "") {
+        window.open(link, "_blank");
+      }
+    });
+  });
+</script>
+
+<style>
+  .wrapper {
+    padding: 80px 0;
+    position: relative;
+    background-color: #000;
+  }
+
+  .container {
+    width: 1320px;
+    padding: 0 12px;
+    margin: 0 auto;
+  }
+
+  .box h2 {
+    font-size: 45px;
+    text-align: center;
+  }
+  .box p {
+    color: #b8b8b8;
+    font-size: 18px;
+    letter-spacing: 0.8px;
+    line-height: 1.5em;
+    margin: 14px auto 30px auto;
+    text-align: center;
+    width: 56%;
+  }
+
+  .project-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    row-gap: 20px;
+    column-gap: 20px;
+  }
+
+  .project-box {
+    position: relative;
+    cursor: pointer;
+  }
+
+  .project-box::before {
+    content: "";
+    background: linear-gradient(90.21deg, #aa367c -5.91%, #4a2fbd 111.58%);
+    opacity: 0.85;
+    position: absolute;
+    width: 100%;
+    height: 0;
+    transition: 0.4s ease-in-out;
+  }
+
+  .project-box:hover::before {
+    height: 100%;
+  }
+
+  .project-box img {
+    width: 100%;
+    height: auto;
+  }
+
+  .project-box .desc {
+    position: absolute;
+    text-align: center;
+    top: 65%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transition: 0.5s ease-in-out;
+    opacity: 0;
+    width: 100%;
+  }
+
+  .project-box:hover .desc {
+    top: 50%;
+    opacity: 1;
+  }
+
+  .desc h4 {
+    font-size: 30px;
+    letter-spacing: 0.8px;
+    line-height: 1.1em;
+  }
+
+  .desc span {
+    font-style: italic;
+    font-weight: 400;
+    font-size: 15px;
+    letter-spacing: 0.8px;
+  }
+</style>

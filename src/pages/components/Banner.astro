@@ -1,0 +1,294 @@
+---
+---
+
+<section class="banner">
+  <div class="container">
+    <div class="box">
+      <div class="left animate__animated animate__fadeIn">
+        <span class="welcom">Welcome to my Portfolio</span>
+        <h1 class="greeting">
+          Hi! I'm phos, <span class="wrap"></span>
+        </h1>
+        <p>
+          As a software developer, I find great satisfaction in my profession.
+          Continuously learning about new technologies and expanding my
+          knowledge base keeps me enthralled with software development.
+          Collaborating with exceptional people is always a pleasure, as I enjoy
+          building strong and productive relationships. Outside of work, I
+          cherish my beloved family and embrace all the joys that life has to
+          offer.
+        </p>
+        <button
+          >Let's Connect <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 16 16"
+            width="25"
+            height="25"
+            fill="currentColor"
+            ><path
+              fill-rule="evenodd"
+              d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8zm15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5z"
+            ></path></svg
+          ></button
+        >
+      </div>
+      <div class="right">
+        <img
+          src="/img/header-img.svg"
+          alt="#"
+          class="animate__animated animate__zoomIn"
+        />
+      </div>
+    </div>
+  </div>
+</section>
+<script>
+  import "animate.css";
+
+  const rotateText = () => {
+    const toRotate = [
+      "a Web Developer",
+      "a Mobile App Developer",
+      "a Backend Developer",
+    ];
+    let idx = 0;
+    let curr = toRotate[idx];
+    let len = 0;
+    let isDeleting = false;
+    let delay = 400;
+    let timer: number | null = null;
+    let delCount = 0;
+
+    const rotate = () => {
+      const wrap: HTMLElement | null = document.querySelector(".wrap");
+
+      if (len == 0 && isDeleting == true) {
+        idx = (idx + 1) % toRotate.length;
+        curr = toRotate[idx];
+        isDeleting = false;
+        delCount = 0;
+
+        if (timer != null) {
+          clearInterval(timer);
+        }
+        timer = setInterval(() => {
+          rotate();
+        }, delay);
+      }
+
+      if (len > curr.length && isDeleting == false) {
+        isDeleting = true;
+        if (timer != null) {
+          clearInterval(timer);
+        }
+        startBlink();
+
+        setTimeout(() => {
+          stopBlink();
+        }, delay + 3000);
+
+        setTimeout(() => {
+          timer = setInterval(() => {
+            rotate();
+          }, delay);
+        }, 3000);
+      }
+
+      if (wrap != null) {
+        wrap.innerHTML = curr.substring(0, len);
+      }
+
+      if (isDeleting) {
+        if (delCount > 4) {
+          if (timer != null) {
+            clearInterval(timer);
+          }
+
+          timer = setInterval(() => {
+            rotate();
+          }, 40);
+        }
+        len -= 1;
+        delCount += 1;
+      } else {
+        len += 1;
+      }
+    };
+
+    const startBlink = () => {
+      const wrap: HTMLElement | null = document.querySelector(
+        ".banner .container .box .left .greeting .wrap"
+      );
+      if (wrap != null) {
+        wrap.classList.add("blink");
+      }
+    };
+
+    const stopBlink = () => {
+      const wrap: HTMLElement | null = document.querySelector(
+        ".banner .container .box .left .greeting .wrap"
+      );
+      if (wrap != null) {
+        wrap.classList.remove("blink");
+      }
+    };
+
+    timer = setInterval(() => {
+      rotate();
+    }, delay);
+  };
+
+  document
+    .querySelector(".right img")
+    ?.addEventListener("animationend", (e) => {
+      // @ts-ignore
+      if (e.animationName == "zoomIn") {
+        // @ts-ignore
+        const img: HTMLElement | null = e.target;
+        img?.classList?.remove("animate__zoomIn");
+        img?.classList?.add("updown");
+      }
+    });
+
+  window.onload = function () {
+    rotateText();
+  };
+</script>
+
+<style>
+  .banner {
+    padding: 260px 0 100px 0;
+    background-image: url("/img/banner-bg.png");
+    background-position: top center;
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+
+  .container {
+    width: 1320px;
+    margin: 0 auto;
+    padding: 0 12px;
+  }
+
+  .box {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .left {
+    width: 770px;
+  }
+
+  .right {
+    flex: 1;
+  }
+
+  .welcom {
+    letter-spacing: 0.8px;
+    padding: 8px 10px;
+    background: linear-gradient(
+      90.21deg,
+      rgba(170, 54, 124, 0.5) -5.91%,
+      rgba(74, 47, 189, 0.5) 111.58%
+    );
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    font-size: 20px;
+    margin-bottom: 16px;
+    display: inline-block;
+  }
+
+  .greeting {
+    font-size: 65px;
+    letter-spacing: 0.8px;
+    font-weight: 700;
+    line-height: 1;
+    margin-bottom: 20px;
+    display: block;
+  }
+
+  @keyframes blink {
+    from {
+      border-color: rgba(102, 102, 102, 1);
+    }
+    to {
+      border-color: rgba(102, 102, 102, 0);
+    }
+  }
+
+  .wrap {
+    border-right: 0.08em solid rgba(102, 102, 102, 1);
+    padding-right: 4px;
+  }
+
+  .wrap.blink {
+    animation-name: blink;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite;
+    animation-duration: 1.25s;
+  }
+
+  .left p {
+    color: #b8b8b8;
+    font-size: 18px;
+    letter-spacing: 0.8px;
+    line-height: 1.5em;
+    width: 96%;
+  }
+
+  .left button {
+    cursor: pointer;
+    color: #fff;
+    margin-top: 60px;
+    letter-spacing: 0.8px;
+    display: flex;
+    align-items: center;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    font-size: 20px;
+  }
+
+  .left button svg {
+    font-size: 25px;
+    margin-left: 10px;
+    transition: 0.3s ease-in-out;
+    line-height: 1;
+  }
+
+  .left button:hover svg {
+    margin-left: 25px;
+  }
+
+  .right {
+    padding: 0 12px;
+  }
+
+  @keyframes updown {
+    0% {
+      transform: translateY(0);
+    }
+    25% {
+      transform: translateY(20px);
+    }
+    50% {
+      transform: translateY(0);
+    }
+
+    75% {
+      transform: translateY(-20px);
+    }
+
+    100% {
+      transform: translateY(0);
+    }
+  }
+
+  .right img {
+    width: 100%;
+    height: auto;
+  }
+
+  .right img.updown {
+    animation: updown 3s linear 0.3s infinite;
+  }
+</style>
