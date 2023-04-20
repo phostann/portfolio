@@ -25,7 +25,7 @@ const projects: IProject[] = [
 ];
 ---
 
-<section class="wrapper">
+<section class="wrapper" id="projects">
   <div class="container">
     <div class="box">
       <h2>projects</h2>
@@ -73,8 +73,51 @@ const projects: IProject[] = [
     background-color: #000;
   }
 
+  @media (min-width: 576px) {
+    .container {
+      max-width: 540px;
+    }
+    .project-container {
+      grid-template-columns: repeat(1, 1fr) !important;
+    }
+  }
+  @media (min-width: 768px) {
+    .container {
+      max-width: 720px;
+    }
+    .project-container {
+      grid-template-columns: repeat(2, 1fr) !important;
+    }
+  }
+
+  @media (min-width: 992px) {
+    .container {
+      max-width: 960px;
+    }
+    .project-container {
+      grid-template-columns: repeat(2, 1fr) !important;
+    }
+  }
+  @media (min-width: 1200px) {
+    .container {
+      max-width: 1140px;
+    }
+
+    .project-container {
+      grid-template-columns: repeat(3, 1fr) !important;
+    }
+  }
+  @media (min-width: 1400px) {
+    .container {
+      max-width: 1320px;
+    }
+    .project-container {
+      grid-template-columns: repeat(3, 1fr) !important;
+    }
+  }
+
   .container {
-    width: 1320px;
+    width: 100%;
     padding: 0 12px;
     margin: 0 auto;
   }
@@ -90,14 +133,15 @@ const projects: IProject[] = [
     line-height: 1.5em;
     margin: 14px auto 30px auto;
     text-align: center;
-    width: 56%;
+    width: 80%;
   }
 
   .project-container {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(1, 1fr);
     row-gap: 20px;
     column-gap: 20px;
+    padding: 0 20px;
   }
 
   .project-box {
