@@ -35,8 +35,6 @@ import CircleIcon from "../../components/circle-icon/CircleIcon.astro";
 
   let prevWidth = document.body.clientWidth;
 
-  console.log("prevWidth", prevWidth);
-
   const onScroll = debounce(() => {
     const hader: HTMLElement | null = document.querySelector(".header");
     if (hader != null && window.scrollY > 60) {
@@ -81,7 +79,6 @@ import CircleIcon from "../../components/circle-icon/CircleIcon.astro";
   );
   if (floatMenuIcon != null) {
     floatMenuIcon.addEventListener("click", () => {
-      console.log("on click");
       const navContainer: HTMLElement | null = document.querySelector(
         "header .nav-container"
       );
