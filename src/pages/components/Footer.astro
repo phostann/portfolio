@@ -5,7 +5,9 @@ import CircleIcon from "../../components/circle-icon/CircleIcon.astro";
 <footer class="footer">
   <div class="container">
     <div class="box">
-      <img src="/img/logo.svg" alt="" />
+      <div class="logo-container">
+        <img src="/img/logo.svg" alt="" />
+      </div>
       <div class="social">
         <div class="social-icons">
           <CircleIcon icon="/img/nav-icon1.svg" href="/" />
@@ -27,9 +29,46 @@ import CircleIcon from "../../components/circle-icon/CircleIcon.astro";
     background-repeat: no-repeat;
   }
 
+  @media (min-width: 576px) {
+    .container {
+      max-width: 540px;
+    }
+  }
+  @media (min-width: 768px) {
+    .container {
+      max-width: 720px;
+    }
+
+    .logo-container {
+      flex: 1;
+    }
+
+    .social-icons {
+      justify-content: flex-end !important;
+      margin-top: 0 !important;
+    }
+  }
+
+  @media (min-width: 992px) {
+    .container {
+      max-width: 960px;
+    }
+  }
+  @media (min-width: 1200px) {
+    .container {
+      max-width: 1140px;
+    }
+  }
+  @media (min-width: 1400px) {
+    .container {
+      max-width: 1320px;
+    }
+  }
+
   .container {
-    width: 1320px;
+    width: 100%;
     margin: 0 auto;
+    padding: 0 20px;
   }
 
   .box {
@@ -40,9 +79,18 @@ import CircleIcon from "../../components/circle-icon/CircleIcon.astro";
     padding-top: 40px;
   }
 
+  .box .logo-container {
+    width: 100%;
+  }
+
+  .logo-container img {
+    max-width: 80%;
+  }
+
   .social-icons {
     display: flex;
-    justify-content: flex-end;
+    justify-content: flex-start;
+    margin-top: 20px;
   }
 
   .social-icons .ml-6 {

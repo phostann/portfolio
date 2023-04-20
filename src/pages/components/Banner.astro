@@ -1,7 +1,7 @@
 ---
 ---
 
-<section class="banner">
+<section class="banner" id="home">
   <div class="container">
     <div class="box">
       <div class="left animate__animated animate__fadeIn">
@@ -18,19 +18,21 @@
           cherish my beloved family and embrace all the joys that life has to
           offer.
         </p>
-        <button
-          >Let's Connect <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 16 16"
-            width="25"
-            height="25"
-            fill="currentColor"
-            ><path
-              fill-rule="evenodd"
-              d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8zm15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5z"
-            ></path></svg
-          ></button
-        >
+        <a href="#contact">
+          <button
+            >Let's Connect <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 16 16"
+              width="25"
+              height="25"
+              fill="currentColor"
+              ><path
+                fill-rule="evenodd"
+                d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8zm15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5z"
+              ></path></svg
+            ></button
+          >
+        </a>
       </div>
       <div class="right">
         <img
@@ -164,19 +166,55 @@
     background-repeat: no-repeat;
   }
 
+  @media (min-width: 576px) {
+    .container {
+      max-width: 540px;
+    }
+  }
+
+  @media (min-width: 768px) {
+    .container {
+      max-width: 720px;
+      padding: 0 12px !important;
+    }
+    .left {
+      flex: 1;
+      width: 50%;
+    }
+  }
+
+  @media (min-width: 992px) {
+    .container {
+      max-width: 960px;
+    }
+  }
+  @media (min-width: 1200px) {
+    .container {
+      max-width: 1140px;
+    }
+
+    .left {
+      /* flex: 1; */
+      width: 58.3333333%;
+    }
+  }
+  @media (min-width: 1400px) {
+    .container {
+      max-width: 1320px;
+    }
+  }
   .container {
-    width: 1320px;
+    width: 100%;
     margin: 0 auto;
-    padding: 0 12px;
+    padding: 0 20px;
   }
 
   .box {
     display: flex;
     flex-wrap: wrap;
   }
-
   .left {
-    width: 770px;
+    width: 100%;
   }
 
   .right {

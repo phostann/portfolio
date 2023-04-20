@@ -7,26 +7,37 @@ import CircleIcon from "../../components/circle-icon/CircleIcon.astro";
     <a class="logo" href="/">
       <img src="/img/logo.jpg" alt="#" />
     </a>
-    <div class="anchor-container">
-      <a href="#home" class="active">Home</a>
-      <a href="#home">Skills</a>
-      <a href="#home">Projects</a>
+    <div class="float-menu-icon">
+      <img src="/img/menu-icon.svg" alt="" />
     </div>
-    <div class="social-container">
-      <CircleIcon icon="/img/nav-icon1.svg" href="/" />
-      <CircleIcon icon="/img/nav-icon2.svg" href="/" class="ml-6" />
-      <CircleIcon icon="/img/nav-icon3.svg" href="/" class="ml-6" />
+    <div class="nav-container">
+      <div class="anchor-container">
+        <a href="#home" class="active">Home</a>
+        <a href="#skills">Skills</a>
+        <a href="#projects">Projects</a>
+      </div>
+      <div class="social-container">
+        <CircleIcon icon="/img/nav-icon1.svg" href="/" />
+        <CircleIcon icon="/img/nav-icon2.svg" href="/" class="ml-6" />
+        <CircleIcon icon="/img/nav-icon3.svg" href="/" class="ml-6" />
+      </div>
+      <a class="connect" href="#contact">
+        <button class="connect-btn">
+          <span>Let's Connect</span>
+        </button>
+      </a>
     </div>
-    <button class="connect-btn">
-      <span>Let's Connect</span>
-    </button>
   </nav>
 </header>
 
 <script>
   import { debounce } from "../../utils/debounce";
 
-  const onScroll = debounce((e) => {
+  let prevWidth = document.body.clientWidth;
+
+  console.log("prevWidth", prevWidth);
+
+  const onScroll = debounce(() => {
     const hader: HTMLElement | null = document.querySelector(".header");
     if (hader != null && window.scrollY > 60) {
       hader.classList.add("scrolled");
@@ -35,7 +46,48 @@ import CircleIcon from "../../components/circle-icon/CircleIcon.astro";
     }
   }, 60);
 
-  window.onscroll = onScroll;
+  window.addEventListener("scroll", onScroll);
+
+  const onResize = debounce(() => {
+    const navContainer: HTMLElement | null = document.querySelector(
+      "header .nav-container"
+    );
+    const currentWidth = document.body.clientWidth;
+    if (currentWidth > 768 && prevWidth <= 768) {
+      navContainer?.classList?.remove("show");
+    }
+    prevWidth = currentWidth;
+  }, 60);
+
+  window.addEventListener("resize", onResize);
+
+  const anchorContainer: HTMLDivElement | null = document.querySelector(
+    "header nav div.anchor-container"
+  );
+
+  if (anchorContainer != null) {
+    anchorContainer.addEventListener("click", (e) => {
+      // @ts-ignore
+      const target: HTMLElement = e.target;
+      if (target.nodeName === "A") {
+        anchorContainer.querySelector("a.active")?.classList?.remove("active");
+        target.classList.add("active");
+      }
+    });
+  }
+
+  const floatMenuIcon: HTMLElement | null = document.querySelector(
+    "header .float-menu-icon"
+  );
+  if (floatMenuIcon != null) {
+    floatMenuIcon.addEventListener("click", () => {
+      console.log("on click");
+      const navContainer: HTMLElement | null = document.querySelector(
+        "header .nav-container"
+      );
+      navContainer?.classList?.toggle("show");
+    });
+  }
 </script>
 
 <style>
@@ -53,17 +105,78 @@ import CircleIcon from "../../components/circle-icon/CircleIcon.astro";
     background-color: #121212;
   }
 
+  @media (min-width: 576px) {
+    .header .nav {
+      max-width: 540px;
+    }
+  }
+  @media (min-width: 768px) {
+    .header .nav {
+      max-width: 720px;
+      padding: 0 !important;
+    }
+    .float-menu-icon {
+      display: none;
+    }
+
+    .nav-container {
+      height: auto !important;
+      flex: 1;
+      justify-content: flex-end;
+    }
+
+    .anchor-container {
+      flex: 1;
+    }
+
+    .anchor-container a {
+      width: auto !important;
+    }
+  }
+
+  @media (min-width: 992px) {
+    .header .nav {
+      max-width: 960px;
+    }
+  }
+  @media (min-width: 1200px) {
+    .header .nav {
+      max-width: 1140px;
+    }
+  }
+  @media (min-width: 1400px) {
+    .header .nav {
+      max-width: 1320px;
+    }
+  }
+
   .header .nav {
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
-    justify-content: space-between;
-    width: 1320px;
+    width: 100%;
     margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  .header .nav .nav-container {
+    width: 100%;
+    height: 0;
+    display: flex;
+    overflow: hidden;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: flex-start;
+    transition: 0.3s ease-in-out;
+  }
+
+  .header .nav .nav-container.show {
+    height: 130px;
   }
 
   .header .nav .logo {
     display: block;
-    width: 3.5%;
+    width: 40px;
   }
 
   .header .nav .logo img {
@@ -73,8 +186,9 @@ import CircleIcon from "../../components/circle-icon/CircleIcon.astro";
   }
 
   .header .nav .anchor-container {
-    flex: 1;
+    width: 100%;
     display: flex;
+    flex-wrap: wrap;
     justify-content: flex-end;
   }
 
@@ -86,6 +200,8 @@ import CircleIcon from "../../components/circle-icon/CircleIcon.astro";
     transition: all 0.15s;
     letter-spacing: 0.8px;
     font-size: 18px;
+    display: block;
+    width: 100%;
   }
 
   .header .nav .anchor-container a.active,
@@ -132,5 +248,15 @@ import CircleIcon from "../../components/circle-icon/CircleIcon.astro";
 
   .connect-btn:hover::before {
     width: 100%;
+  }
+
+  .float-menu-icon {
+    margin-left: auto;
+    cursor: pointer;
+  }
+
+  .float-menu-icon img {
+    width: 30px;
+    height: auto;
   }
 </style>
