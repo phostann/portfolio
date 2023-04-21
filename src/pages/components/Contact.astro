@@ -11,17 +11,35 @@
           class="animate__animated animate__zoomIn"
         />
       </div>
-      <form class="right" action="javascript:void()">
+      <form class="right" action="javascript:void()" id="contact-form">
         <h2>Get In Touch</h2>
-        <input type="text" name="name" class="name" placeholder="Your Name" />
+        <input
+          type="text"
+          name="to_name"
+          hidden
+          value="phos"
+          minlength="4"
+          maxlength="4"
+        />
+        <input
+          type="text"
+          name="from_name"
+          class="name"
+          placeholder="Your Name"
+          minlength="1"
+        />
         <input
           type="email"
           name="email"
           class="email"
           placeholder="Email Address"
         />
-        <textarea name="message" cols="30" rows="10" placeholder="Message"
-        ></textarea>
+        <textarea
+          name="message"
+          cols="30"
+          rows="10"
+          placeholder="Message"
+          minlength="1"></textarea>
         <button class="submit" type="submit">
           <span>Send</span>
         </button>
@@ -31,10 +49,44 @@
 </section>
 
 <script>
+  import emailjs from "@emailjs/browser";
+
   document
-    .querySelector(".contact form button.submit")
+    .querySelector(".contact form#contact-form button.submit")
     ?.addEventListener("click", (e) => {
       e.stopPropagation();
+
+      const btn = e.currentTarget as HTMLButtonElement;
+
+      const span = btn.querySelector("span") as HTMLSpanElement;
+
+      console.log(span);
+
+      if (span.textContent !== "Send") {
+        return;
+      }
+
+      span.textContent = "Sending...";
+
+      emailjs
+        .sendForm(
+          "service_0kc5f2t",
+          "template_1194z87",
+          "#contact-form",
+          "nQl-uusHnK35PQngS"
+        )
+        .then((res) => {
+          span.textContent = "Sent";
+          setTimeout(() => {
+            span.textContent = "Send";
+          }, 2000);
+        })
+        .catch((e) => {
+          span.textContent = "Failed";
+          setTimeout(() => {
+            span.textContent = "Send";
+          }, 2000);
+        });
     });
 </script>
 

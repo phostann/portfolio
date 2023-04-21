@@ -11,7 +11,7 @@ const { title } = Astro.props;
   <head>
     <meta charset="UTF-8" />
     <!-- <meta name="viewport" content="width=device-width" /> -->
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
@@ -20,6 +20,7 @@ const { title } = Astro.props;
     <slot />
   </body>
 </html>
+
 <style is:global>
   @font-face {
     font-family: Centra;
@@ -51,7 +52,7 @@ const { title } = Astro.props;
     position: relative;
     background-color: #121212;
     color: #fff;
-    font-family: 'Centra', sans-serif !important;
+    font-family: "Centra", sans-serif !important;
   }
   a {
     text-decoration: none;
