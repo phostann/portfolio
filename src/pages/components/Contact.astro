@@ -54,13 +54,11 @@
   document
     .querySelector(".contact form#contact-form button.submit")
     ?.addEventListener("click", (e) => {
-      e.stopPropagation();
-
       const btn = e.currentTarget as HTMLButtonElement;
 
-      const span = btn.querySelector("span") as HTMLSpanElement;
+      const form = btn.closest("form") as HTMLFormElement;
 
-      console.log(span);
+      const span = btn.querySelector("span") as HTMLSpanElement;
 
       if (span.textContent !== "Send") {
         return;
@@ -78,6 +76,7 @@
         .then((res) => {
           span.textContent = "Sent";
           setTimeout(() => {
+            form.reset()
             span.textContent = "Send";
           }, 2000);
         })
